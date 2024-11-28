@@ -100,7 +100,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # Avataan MessageBox
     def openWarning(self):
         msgBox = QtWidgets.QMessageBox()
-        msgBox.setIcon(QtWidgets.QMessageBox.Warning)
+        msgBox.setIcon(QtWidgets.QMessageBox.Information)
         msgBox.setWindowTitle('Puuttuvat asetukset!')
         msgBox.setText('Asetuksia ei ole tehty, syötä tietokannan asetukset')
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
