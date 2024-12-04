@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="saveSettingspushButton">
    <property name="geometry">
     <rect>
      <x>180</x>
@@ -37,7 +37,7 @@ color: rgb(255, 255, 255);</string>
     <string>Tallenna</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -46,9 +46,9 @@ color: rgb(255, 255, 255);</string>
      <height>151</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="ServerLabel">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -60,7 +60,7 @@ color: rgb(255, 255, 255);</string>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="portLabel">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -72,7 +72,7 @@ color: rgb(255, 255, 255);</string>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="databaseLabel">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -84,7 +84,7 @@ color: rgb(255, 255, 255);</string>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_4">
+     <widget class="QLabel" name="userLabel">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -96,7 +96,7 @@ color: rgb(255, 255, 255);</string>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_5">
+     <widget class="QLabel" name="passwordLabel">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -109,7 +109,7 @@ color: rgb(255, 255, 255);</string>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -118,9 +118,9 @@ color: rgb(255, 255, 255);</string>
      <height>146</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="serverLineEdit">
       <property name="font">
        <font>
         <pointsize>11</pointsize>
@@ -129,7 +129,7 @@ color: rgb(255, 255, 255);</string>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_2">
+     <widget class="QLineEdit" name="portLineEdit">
       <property name="font">
        <font>
         <pointsize>11</pointsize>
@@ -138,7 +138,7 @@ color: rgb(255, 255, 255);</string>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_3">
+     <widget class="QLineEdit" name="databaseLineEdit">
       <property name="font">
        <font>
         <pointsize>11</pointsize>
@@ -147,7 +147,7 @@ color: rgb(255, 255, 255);</string>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_4">
+     <widget class="QLineEdit" name="userLineEdit">
       <property name="font">
        <font>
         <pointsize>11</pointsize>
@@ -156,7 +156,7 @@ color: rgb(255, 255, 255);</string>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_5">
+     <widget class="QLineEdit" name="paswordLineEdit">
       <property name="font">
        <font>
         <pointsize>11</pointsize>
