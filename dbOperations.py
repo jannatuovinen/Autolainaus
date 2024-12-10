@@ -13,6 +13,7 @@ import json
 # Omat moduulit
 import cipher
 
+
 # LUOKAT
 # ------
 
@@ -31,7 +32,8 @@ class DbConnection():
     
     # Metodi tietojen lisäämiseen (INSERT)
     def  addToTable(self, table: str, data: dict) -> str:
-        """Inserts a record (row) to a table according to a dictionary containing field names (columns) as keys and values
+        """Inserts a record (row) to a table according to a dictionary
+        containing field names (columns) as keys and values
 
         Args:
             table (str): Name of the table
@@ -40,6 +42,7 @@ class DbConnection():
         Returns:
             str: Information about succesfull operation or an error message
         """
+
         # Muodostetaan lista sarakkeiden (kenttien) nimistä ja arvoista SQL lausetta varten
         keys = data.keys() # Luetaan sanakirjan avaimet
         columnList = [] # Alustetaan sarakelista tyhjäksi
@@ -49,6 +52,7 @@ class DbConnection():
         for key in keys:
             columnList.append(key)
             valueList.append(tableDictionary[key])
+
         # Määritellään tilaviestiksi tyhjä merkkijono
         message = ''
 
@@ -96,6 +100,7 @@ if __name__ == "__main__":
                       'database': 'testi',
                       'userName': 'user',
                        'password': 'salasana'}
+    
     tableDictionary = {'Etunimi': 'Erkki',
                        'Sukunimi': 'Esimerkki'}
     
