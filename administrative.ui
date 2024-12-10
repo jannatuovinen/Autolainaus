@@ -747,6 +747,8 @@ color: rgb(255, 255, 255);</string>
     </property>
     <addaction name="actionMuokkaa"/>
     <addaction name="actionTietoja_ohjelmasta"/>
+    <addaction name="separator"/>
+    <addaction name="actionVaihda_salasana"/>
    </widget>
    <addaction name="menuAsetukset"/>
   </widget>
@@ -768,6 +770,11 @@ color: rgb(255, 255, 255);</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+T</string>
+   </property>
+  </action>
+  <action name="actionVaihda_salasana">
+   <property name="text">
+    <string>Vaihda salasana</string>
    </property>
   </action>
  </widget>

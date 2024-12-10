@@ -31,6 +31,8 @@ class Ui_MainWindow(object):
         self.actionMuokkaa.setObjectName(u"actionMuokkaa")
         self.actionTietoja_ohjelmasta = QAction(MainWindow)
         self.actionTietoja_ohjelmasta.setObjectName(u"actionTietoja_ohjelmasta")
+        self.actionVaihda_salasana = QAction(MainWindow)
+        self.actionVaihda_salasana.setObjectName(u"actionVaihda_salasana")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.tabWidget = QTabWidget(self.centralwidget)
@@ -338,6 +340,8 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuAsetukset.menuAction())
         self.menuAsetukset.addAction(self.actionMuokkaa)
         self.menuAsetukset.addAction(self.actionTietoja_ohjelmasta)
+        self.menuAsetukset.addSeparator()
+        self.menuAsetukset.addAction(self.actionVaihda_salasana)
 
         self.retranslateUi(MainWindow)
 
@@ -360,6 +364,7 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(shortcut)
         self.actionTietoja_ohjelmasta.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Shift+T", None))
 #endif // QT_CONFIG(shortcut)
+        self.actionVaihda_salasana.setText(QCoreApplication.translate("MainWindow", u"Vaihda salasana", None))
         self.registerPersonLabel.setText(QCoreApplication.translate("MainWindow", u"Rekister\u00f6idyt lainaajat", None))
         self.savePersonPushButton.setText(QCoreApplication.translate("MainWindow", u"Tallenna", None))
         self.ssnLabel.setText(QCoreApplication.translate("MainWindow", u"Henkil\u00f6tunnus", None))

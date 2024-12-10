@@ -22,10 +22,11 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(291, 219)
+        Dialog.resize(338, 349)
         self.saveSettingspushButton = QPushButton(Dialog)
         self.saveSettingspushButton.setObjectName(u"saveSettingspushButton")
-        self.saveSettingspushButton.setGeometry(QRect(180, 180, 81, 23))
+        self.saveSettingspushButton.setEnabled(False)
+        self.saveSettingspushButton.setGeometry(QRect(240, 200, 81, 23))
         font = QFont()
         font.setPointSize(8)
         font.setBold(True)
@@ -34,7 +35,7 @@ class Ui_Dialog(object):
 "color: rgb(255, 255, 255);")
         self.layoutWidget = QWidget(Dialog)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(20, 20, 91, 151))
+        self.layoutWidget.setGeometry(QRect(20, 20, 91, 171))
         self.verticalLayout_2 = QVBoxLayout(self.layoutWidget)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -64,15 +65,9 @@ class Ui_Dialog(object):
 
         self.verticalLayout_2.addWidget(self.userLabel)
 
-        self.passwordLabel = QLabel(self.layoutWidget)
-        self.passwordLabel.setObjectName(u"passwordLabel")
-        self.passwordLabel.setFont(font1)
-
-        self.verticalLayout_2.addWidget(self.passwordLabel)
-
         self.layoutWidget1 = QWidget(Dialog)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(120, 20, 135, 146))
+        self.layoutWidget1.setGeometry(QRect(120, 20, 201, 171))
         self.verticalLayout = QVBoxLayout(self.layoutWidget1)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -102,12 +97,6 @@ class Ui_Dialog(object):
 
         self.verticalLayout.addWidget(self.userLineEdit)
 
-        self.paswordLineEdit = QLineEdit(self.layoutWidget1)
-        self.paswordLineEdit.setObjectName(u"paswordLineEdit")
-        self.paswordLineEdit.setFont(font2)
-
-        self.verticalLayout.addWidget(self.paswordLineEdit)
-
 
         self.retranslateUi(Dialog)
 
@@ -121,6 +110,5 @@ class Ui_Dialog(object):
         self.portLabel.setText(QCoreApplication.translate("Dialog", u"Portti", None))
         self.databaseLabel.setText(QCoreApplication.translate("Dialog", u"Tietokanta", None))
         self.userLabel.setText(QCoreApplication.translate("Dialog", u"K\u00e4ytt\u00e4j\u00e4tunnus", None))
-        self.passwordLabel.setText(QCoreApplication.translate("Dialog", u"Salasana", None))
     # retranslateUi
 
