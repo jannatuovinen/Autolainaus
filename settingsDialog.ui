@@ -6,17 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>291</width>
+    <width>358</width>
     <height>219</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="applications-development"/>
+  </property>
   <widget class="QPushButton" name="saveSettingspushButton">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>230</x>
      <y>180</y>
      <width>81</width>
      <height>23</height>
@@ -25,7 +28,6 @@
    <property name="font">
     <font>
      <pointsize>8</pointsize>
-     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -114,8 +116,8 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>120</x>
      <y>20</y>
-     <width>135</width>
-     <height>146</height>
+     <width>191</width>
+     <height>156</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -162,9 +164,25 @@ color: rgb(255, 255, 255);</string>
         <pointsize>11</pointsize>
        </font>
       </property>
+      <property name="echoMode">
+       <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
+      </property>
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="closePushButton">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>180</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sulje</string>
+   </property>
   </widget>
  </widget>
  <resources/>

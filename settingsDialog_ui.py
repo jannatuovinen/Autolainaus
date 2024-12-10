@@ -22,10 +22,12 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(291, 219)
+        Dialog.resize(358, 219)
+        icon = QIcon(QIcon.fromTheme(u"applications-development"))
+        Dialog.setWindowIcon(icon)
         self.saveSettingspushButton = QPushButton(Dialog)
         self.saveSettingspushButton.setObjectName(u"saveSettingspushButton")
-        self.saveSettingspushButton.setGeometry(QRect(180, 180, 81, 23))
+        self.saveSettingspushButton.setGeometry(QRect(230, 180, 81, 23))
         font = QFont()
         font.setPointSize(8)
         font.setBold(True)
@@ -72,7 +74,7 @@ class Ui_Dialog(object):
 
         self.layoutWidget1 = QWidget(Dialog)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(120, 20, 135, 146))
+        self.layoutWidget1.setGeometry(QRect(120, 20, 191, 156))
         self.verticalLayout = QVBoxLayout(self.layoutWidget1)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -105,9 +107,13 @@ class Ui_Dialog(object):
         self.paswordLineEdit = QLineEdit(self.layoutWidget1)
         self.paswordLineEdit.setObjectName(u"paswordLineEdit")
         self.paswordLineEdit.setFont(font2)
+        self.paswordLineEdit.setEchoMode(QLineEdit.EchoMode.PasswordEchoOnEdit)
 
         self.verticalLayout.addWidget(self.paswordLineEdit)
 
+        self.closePushButton = QPushButton(Dialog)
+        self.closePushButton.setObjectName(u"closePushButton")
+        self.closePushButton.setGeometry(QRect(120, 180, 75, 24))
 
         self.retranslateUi(Dialog)
 
@@ -122,5 +128,6 @@ class Ui_Dialog(object):
         self.databaseLabel.setText(QCoreApplication.translate("Dialog", u"Tietokanta", None))
         self.userLabel.setText(QCoreApplication.translate("Dialog", u"K\u00e4ytt\u00e4j\u00e4tunnus", None))
         self.passwordLabel.setText(QCoreApplication.translate("Dialog", u"Salasana", None))
+        self.closePushButton.setText(QCoreApplication.translate("Dialog", u"Sulje", None))
     # retranslateUi
 
