@@ -75,7 +75,7 @@
   <table id="TAB18" populated="true" UUID="8a9d1f3c-ba7f-4e87-a00e-70bbf1157409" name="Ryhma" objectType="TABLE" physicalName="ryhma" >
    <remarks>Opiskelijan luokka</remarks>
    <folder id="FOLTAB181" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL19" populated="true" UUID="8273ab15-1be0-4c0d-a27b-3996d29f0807" autoIncrement="false" autoIncrementSequenceName="ryhma_ryhma_seq" defaultValue="" name="Ryhma" nullable="0" physicalName="ryhma" precision="50" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL19" populated="true" UUID="8273ab15-1be0-4c0d-a27b-3996d29f0807" autoIncrement="false" autoIncrementSequenceName="ryhma_ryhma_seq_1" defaultValue="" name="Ryhma" nullable="0" physicalName="ryhma" precision="50" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks>Ryhmän nimi, esim. auto22B tai henkilökunta</remarks>
     </column>
     <column id="COL20" populated="true" UUID="4efdc14f-e105-4c50-9876-035b18d2ef0c" autoIncrement="false" autoIncrementSequenceName="ryhma_vastuuhenkilo_seq" defaultValue="" name="Vastuuhenkilo" nullable="1" physicalName="vastuuhenkilo" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
@@ -124,10 +124,10 @@
     <column id="COL31" populated="true" UUID="3ca662b7-cab0-4260-a0ca-eaa074c83d68" autoIncrement="true" autoIncrementSequenceName="lainaus_lainausnumero_seq" defaultValue="" name="LainausNumero" nullable="0" physicalName="lainausnumero" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks>Lainaustapahtumalle automaattisesti annettava juokseva numero</remarks>
     </column>
-    <column id="COL32" populated="true" UUID="9497f41d-7b47-49ae-a8d8-049a54af1227" autoIncrement="false" autoIncrementSequenceName="lainaaja_hetu_seq" defaultValue="" name="HeTu" nullable="0" physicalName="hetu" precision="11" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
+    <column id="COL32" populated="true" UUID="9497f41d-7b47-49ae-a8d8-049a54af1227" autoIncrement="false" autoIncrementSequenceName="lainaaja_hetu_seq_1" defaultValue="" name="HeTu" nullable="0" physicalName="hetu" precision="11" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
      <remarks>Kansallinen henkilötunnus</remarks>
     </column>
-    <column id="COL33" populated="true" UUID="5931a399-42eb-49f2-a1a9-911541a0ced3" autoIncrement="false" autoIncrementSequenceName="auto_rekisterinumero_seq" defaultValue="" name="Rekisterinumero" nullable="0" physicalName="rekisterinumero" precision="7" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL33" populated="true" UUID="5931a399-42eb-49f2-a1a9-911541a0ced3" autoIncrement="false" autoIncrementSequenceName="auto_rekisterinumero_seq_1" defaultValue="" name="Rekisterinumero" nullable="0" physicalName="rekisterinumero" precision="7" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     <column id="COL34" populated="true" UUID="db687af7-0de9-4ef1-8ffd-c1398ce35ed0" autoIncrement="false" autoIncrementSequenceName="lainaus_lainausaika_seq" defaultValue="" name="Lainausaika" nullable="0" physicalName="lainausaika" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
@@ -159,7 +159,7 @@
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.GenericDDLGenerator" allow-connection="true"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">

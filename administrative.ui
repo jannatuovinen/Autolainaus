@@ -428,11 +428,11 @@
      <attribute name="title">
       <string>Ryhmät</string>
      </attribute>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="SaveGroupPushButton">
       <property name="geometry">
        <rect>
         <x>320</x>
-        <y>50</y>
+        <y>60</y>
         <width>75</width>
         <height>23</height>
        </rect>
@@ -450,13 +450,13 @@ color: rgb(255, 255, 255);</string>
        <string>Tallenna</string>
       </property>
      </widget>
-     <widget class="QTableWidget" name="groupTableWidget">
+     <widget class="QTableWidget" name="saveGroupsTableWidget">
       <property name="geometry">
        <rect>
         <x>20</x>
         <y>120</y>
-        <width>256</width>
-        <height>331</height>
+        <width>371</width>
+        <height>191</height>
        </rect>
       </property>
       <property name="rowCount">
@@ -478,7 +478,7 @@ color: rgb(255, 255, 255);</string>
       <column/>
       <column/>
      </widget>
-     <widget class="QLabel" name="storeGroupLabel">
+     <widget class="QLabel" name="savedGroupsLabel">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -514,7 +514,7 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="responsiblePersonLabel">
+        <widget class="QLabel" name="responsiblePLabel">
          <property name="font">
           <font>
            <pointsize>10</pointsize>
@@ -547,7 +547,7 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="responsiblePersonLneEdit_2">
+        <widget class="QLineEdit" name="responsiblePLineEdit">
          <property name="font">
           <font>
            <pointsize>11</pointsize>

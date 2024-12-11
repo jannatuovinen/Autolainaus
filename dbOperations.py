@@ -27,9 +27,12 @@ class DbConnection():
         self.databaseName = settings['database']
         self.userName = settings['userName']
         self.password = settings['password']
-        self.connectionString = f'database={self.databaseName}, user={self.userName}, password={self.password}, server={self.server}, port={self.port}' 
 
-    
+        # Yhteysmerkkijono
+        self.connectionString = f'dbname={self.databaseName} user={self.userName} password={self.password} host={self.server} port={self.port}'
+
+        
+        print("Yhteysmerkkijono on:", self.connectionString)
     # Metodi tietojen lisäämiseen (INSERT)
     def  addToTable(self, table: str, data: dict) -> str:
         """Inserts a record (row) to a table according to a dictionary
@@ -45,13 +48,24 @@ class DbConnection():
 
         # Muodostetaan lista sarakkeiden (kenttien) nimistä ja arvoista SQL lausetta varten
         keys = data.keys() # Luetaan sanakirjan avaimet
-        columnList = [] # Alustetaan sarakelista tyhjäksi
-        valueList = [] # Akustetaan arvolista tyhjäksi
+        columns = '' # SQL-lauseeseen tarvittava sarakelista
+        values = '' # SQL-lauseen arvot merkkijonona
 
         # Luetaan kaikki avaimet sekä arvot ja lisätään ne listoihin
         for key in keys:
-            columnList.append(key)
-            valueList.append(tableDictionary[key])
+            columns += key + ', ' # Lisätään pilkku
+            rawValue = data[key]
+
+            # Lisätään puolilainausmerkit, jos kyseessä on merkkijono
+            if isinstance(rawValue, str):
+                value = f'\'{rawValue}\'' # \'mahdollistaa puolilainausmerkin lisäämisen
+            else: 
+                value = rawValue
+            values += value + ', ' # lisätään arvo sekä pilkku ja välilyönti
+
+        # Poistetaan sarakkeista ja arvoista viimeinen pilkku ja välilyönti
+        columns = columns[:-2]
+        values = values[:-2]
 
         # Määritellään tilaviestiksi tyhjä merkkijono
         message = ''
@@ -59,25 +73,20 @@ class DbConnection():
         # Yritetään avata yhteys tietokantaan ja lisätä tietue
         try:
             # Luodaan yhteys tietokantaan
-            # currentConnection = psycopg2.connect(self.connectionString)
+            currentConnection = psycopg2.connect(self.connectionString)
 
             # Luodaan kursosi suorittamaan tietokantaoperaatiota
-            # cursor = currentConnection.cursor()
+            cursor = currentConnection.cursor()
 
-            # Määritellään SQL-lause suoritettavaksi
-            columns = ''
-            values = ''
-            for column in columnList:
-                columns += column + ','
+            # Määritellään lopullinen SQL-lause
+            sqlClause = f'INSERT INTO {table} ({columns}) VALUES ({values})'
+            print('SQL-lause omn:', sqlClause)
 
-            # TODO: Tee tähän toiminto, joka siistii viimeisen ,:n ja välilyönnin pois merkkijonosta
-            sqlClause = f'INSERT INTO {table} ({columns}) VALUES {(valueList)})'
-            print(sqlClause)
             # Suoritetaan SQL-lause
-            # cursor.execute(sqlClause)
+            cursor.execute(sqlClause)
 
             # Vahvistetaan tapahtuma (transaction)
-            # currentConnection.commit()
+            currentConnection.commit()
 
         except (Exception, psycopg2.Error) as e:
             message = 'Tietokantayhteyden muodostamisessa tapahtui virhe: ' + str(e)
@@ -87,9 +96,9 @@ class DbConnection():
                 message = f'Tietue lisättiin tauluun {table}'
 
             # Selvitetään muodostuiko yhteysolio
-            # if currentConnection:
-                # cursor.close() # Tuhotaan kursori
-                # currentConnection.close() # Tuhotaan yhteys
+            if currentConnection:
+                cursor.close() # Tuhotaan kursori
+                currentConnection.close() # Tuhotaan yhteys
 
             return message
         
@@ -101,8 +110,8 @@ if __name__ == "__main__":
                       'userName': 'user',
                        'password': 'salasana'}
     
-    tableDictionary = {'Etunimi': 'Erkki',
-                       'Sukunimi': 'Esimerkki'}
+    tableDictionary = {'etunimi': 'Uolevi',
+                       'sukunimi': 'Untamo'}
     
 
     dbConnection = DbConnection(testDictionary)
