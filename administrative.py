@@ -48,14 +48,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 jsonData = settingsFile.read()
                 self.currentSettings = json.loads(jsonData)
 
+            # Puretaan salasana tietokantaoperaatioita varten
+            self.plainTextPassword = cipher.decryptString(self.currentSettings['password'])
+
             # Huom! Salasana pitää tallentaa JSON-tiedostoon tavallisena merkkijonona,
             # ei byte string muodossa. Salauskirjaston decode ja encode metodit hoitavat asian
-
-            
-            
+           
         except Exception as e:
-            
-            print('tapahtui virhe: ', str(e))
             self.openSettingsDialog()
 
         # OHJELMOIDUT SIGNAALIT
@@ -67,11 +66,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Painikkeet
         self.ui.SaveGroupPushButton.clicked.connect(self.saveGroup)
-        
+        self.ui.savePersonPushButton.clicked.connect(self.savePerson)
+        self.ui.saveVehiclepushButton.clicked.connect(self.saveVehicle)
 
         
    
    
+    
     # OHJELMOIDUT SLOTIT
     # ==================
 
@@ -100,9 +101,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def saveGroup(self):
         # Määritellään tietokanta-asetukset
         dbSettings = self.currentSettings
-        plainTextPassword = cipher.decryptString(dbSettings['password'])
+        plainTextPassword = self.plainTextPassword
         dbSettings['password'] = plainTextPassword
-        print('Tietokanta-asetukset ovat:', dbSettings)
+
+
 
         # Määritellään tallennusmetodin vaatimat parametrit
         tableName = 'ryhma'
@@ -119,18 +121,92 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             dbConnection.addToTable(tableName, groupDictionary)
         except Exception as e:
             print('Virheilmoitus', str(e))
-            self.openWarning()
+            self.openWarning('Tallennus ei onnistunut', str(e))
 
+    # Lainaajan tallennus
+    def savePerson(self):
+        # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword
+
+
+        # Määritellään tallennusmetodin vaatimat parametrit
+        tableName = 'lainaaja'
+        ssn = self.ui.ssnLineEdit.text()
+        email = self.ui.emailLineEdit.text()
+        firstName = self.ui.firstNameLineEdit.text()
+        lastName = self.ui.lastNameLineEdit.text()
+        # Asetetaan ryhmä tilapäisesti
+        self.ui.groupComboBox.setCurrentText('Ei määritelty')
+
+        # TODO: Lisää tähän koodi, jolla haetaan ryhmät yhdistelmäruutuun
+        group = self.ui.groupComboBox.currentText()
+        licenseType = self.ui.vehicleClassLineEdit.text()
+        lenderDictionary = {'hetu': ssn,
+                            'sahkoposti': email,
+                            'etunimi': firstName,
+                            'sukunimi': lastName,
+                            'ryhma': 'Auto23',
+                            'ajokorttiluokka': licenseType }
+        
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan tallennusmetodia
+        try:
+            dbConnection.addToTable(tableName, lenderDictionary)
+        except Exception as e:
+            print('Virheilmoitus', str(e))
+            self.openWarning('Tallennus ei onnistunut', str(e))
+
+    # Ajoveuvon tallennus
+    def saveVehicle(self):
+        # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword
+
+        numberPlate = self.ui.numberPlateLineEdit.text()
+        manuFacturer = self.ui.manufacturerLineEdit.text()
+        model = self.ui.modelLineEdit.text()
+        year = self.modelYearLineEdit.text()
+        capacity = int(self.ui.capacityLineEdit.text())
+        # Määritellään tallennusmetodin vaatimat parametrit
+        tableName = 'auto'
+
+        vehicleDictionary = {'rekisterinumero': numberPlate,
+                             'merkki': manuFacturer,
+                             'malli': model,
+                             'vuosimalli': year,
+                             'henkilomaara': capacity}
+        
+        # Luodaan tietokantayhteysolio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan tallennusmetodia
+        try:
+            dbConnection.addToTable(tableName, vehicleDictionary)
+        except Exception as e:
+            print('Virheilmoitus', str(e))
+            self.openWarning('Tallennus ei onnistunut', str(e))
 
     # Virheilmoitukset ja muut Message Box -dialogit
     # ----------------------------------------------
 
     # Malli mahdollista virheilmoitusta varten
-    def openWarning(self):
+    def openWarning(self, title: str, text: str) -> None:
+        """Opens a message box for errors
+
+        Args:
+            title (str): The title of the message box
+            text (str): Error message
+        """
         msgBox = QtWidgets.QMessageBox()
         msgBox.setIcon(QtWidgets.QMessageBox.Critical)
-        msgBox.setWindowTitle('Hirveetä!')
-        msgBox.setText('Jotain kamalaa tapahtui')
+        msgBox.setWindowTitle(title)
+        msgBox.setText('Tapahtui vakava virhe')
+        msgBox.setDetailedText(text)
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec()
 
