@@ -14,8 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="preferences-desktop-accessibility">
-    <normaloff>.</normaloff>.</iconset>
+   <iconset theme="preferences-desktop-accessibility"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
@@ -33,36 +32,37 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
-    <widget class="QWidget" name="studentTab">
+    <widget class="QWidget" name="lenderTab">
      <attribute name="title">
       <string>Lainaajat</string>
      </attribute>
-     <widget class="QTableWidget" name="registerPersontableWidget">
+     <widget class="QTableWidget" name="registeredPersonsTableWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>300</y>
-        <width>731</width>
+        <width>641</width>
         <height>201</height>
        </rect>
       </property>
       <property name="rowCount">
-       <number>5</number>
-      </property>
-      <property name="columnCount">
        <number>10</number>
       </property>
+      <property name="columnCount">
+       <number>6</number>
+      </property>
       <row/>
       <row/>
       <row/>
       <row/>
       <row/>
-      <column/>
-      <column/>
-      <column/>
-      <column/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
       <column/>
       <column/>
       <column/>
@@ -92,7 +92,7 @@
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>170</y>
+        <y>180</y>
         <width>101</width>
         <height>23</height>
        </rect>
@@ -100,7 +100,6 @@
       <property name="font">
        <font>
         <pointsize>8</pointsize>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -131,7 +130,7 @@ color: rgb(255, 255, 255);</string>
         <x>110</x>
         <y>20</y>
         <width>169</width>
-        <height>181</height>
+        <height>188</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -196,7 +195,7 @@ color: rgb(255, 255, 255);</string>
        <rect>
         <x>10</x>
         <y>21</y>
-        <width>86</width>
+        <width>88</width>
         <height>181</height>
        </rect>
       </property>
@@ -412,7 +411,7 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="saveVehiclepushButton">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>300</x>
         <y>150</y>
         <width>91</width>
         <height>23</height>
@@ -421,7 +420,6 @@ color: rgb(255, 255, 255);</string>
       <property name="font">
        <font>
         <pointsize>8</pointsize>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -436,7 +434,7 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="printBarcodepushButton">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>300</x>
         <y>120</y>
         <width>91</width>
         <height>23</height>
@@ -445,7 +443,6 @@ color: rgb(255, 255, 255);</string>
       <property name="font">
        <font>
         <pointsize>8</pointsize>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -502,11 +499,11 @@ color: rgb(255, 255, 255);</string>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="groupTab">
+    <widget class="QWidget" name="groupsTab">
      <attribute name="title">
       <string>Ryhmät</string>
      </attribute>
-     <widget class="QPushButton" name="SaveGroupPushButton">
+     <widget class="QPushButton" name="savedGroupsPushButton">
       <property name="geometry">
        <rect>
         <x>320</x>
@@ -518,7 +515,6 @@ color: rgb(255, 255, 255);</string>
       <property name="font">
        <font>
         <pointsize>11</pointsize>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -530,7 +526,7 @@ color: rgb(255, 255, 255);</string>
        <string>Tallenna</string>
       </property>
      </widget>
-     <widget class="QTableWidget" name="saveGroupsTableWidget">
+     <widget class="QTableWidget" name="savedGroupsTableWidget">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -680,7 +676,7 @@ color: rgb(255, 255, 255);</string>
        <rect>
         <x>20</x>
         <y>90</y>
-        <width>110</width>
+        <width>131</width>
         <height>22</height>
        </rect>
       </property>
@@ -711,9 +707,9 @@ color: rgb(255, 255, 255);</string>
      <widget class="QDateEdit" name="endingDateEdit">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>190</x>
         <y>90</y>
-        <width>110</width>
+        <width>131</width>
         <height>22</height>
        </rect>
       </property>
@@ -726,7 +722,7 @@ color: rgb(255, 255, 255);</string>
      <widget class="QLabel" name="endingLabel">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>190</x>
         <y>70</y>
         <width>47</width>
         <height>13</height>
@@ -803,8 +799,8 @@ color: rgb(255, 255, 255);</string>
        <rect>
         <x>20</x>
         <y>160</y>
-        <width>47</width>
-        <height>13</height>
+        <width>71</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
@@ -820,7 +816,7 @@ color: rgb(255, 255, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>33</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAsetukset">
