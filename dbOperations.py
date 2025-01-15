@@ -7,13 +7,6 @@
 # Ladattavat kirjastot
 import psycopg2
 
-# Sisäiset kirjastot
-import json
-
-# Omat moduulit
-import cipher
-
-
 # LUOKAT
 # ------
 
@@ -187,26 +180,12 @@ class DbConnection():
         
 if __name__ == "__main__":
 
-    testDictionary = {'server': 'localhost',
+    settingsDictionary = {'server': 'localhost',
                       'port': '5432',
-                      'database': 'autolainaus',
-                      'userName': 'autolainaus',
-                      'password': 'Q2werty'}    
+                      'database': 'testaus',
+                      'userName': 'postgres',
+                      'password': 'Q2werty'}
     
-    tableDictionary = {'etunimi': 'Uolevi',
-                       'sukunimi': 'Untamo'}
-    
-    
-    dbConnection = DbConnection(testDictionary)
+    dbConnection = DbConnection(settingsDictionary)
 
-    print('Yhteysmerkkijono on:', dbConnection.connectionString)
-
-    # dbConnection.addToTable('testitaulu', tableDictionary)
-    recordSet = dbConnection.readAllColumnsFromTable('ryhma')
-    print('Ryhmän tiedot ovat:', recordSet)
-
-    recordSet2 = dbConnection.readColumnsFromTable('ryhma', ['ryhma', 'vastuuhenkilo'])
-    print('Ryhmät ja vastuuhenkilöt ovat:', recordSet2)
-
-    recordSet3 = dbConnection.readColumnsFromTable('ryhma', ['vastuuhenkilo'])
-    print('Vastuuhenkilöitä ovat:', recordSet3)
+    print(dbConnection.connectionString)
