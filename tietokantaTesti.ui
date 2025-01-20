@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="emblem-shared"/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(223, 32, 112);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="ssnLineEdit">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>330</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 127);
+color: rgb(32, 75, 70);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>Lue ajokortti</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="keyBarcodeLineEdit">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>330</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 127);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>Lue avain</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="takeCarPushButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>0</y>
+      <width>171</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Tallentaa henkilön tiedot tietokantaa&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="toolTipDuration">
+     <number>3000</number>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(140, 51, 85);</string>
+    </property>
+    <property name="text">
+     <string>LAINAA</string>
+    </property>
+    <property name="icon">
+     <iconset resource="testPictures.qrc">
+      <normaloff>:/png/ota.png</normaloff>:/png/ota.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>42</width>
+      <height>42</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QLabel" name="keyPictureLabel">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>180</y>
+      <width>201</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="testPictures.qrc">:/png/keys.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="teacherPictureLabel">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>100</y>
+      <width>211</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>IBeamCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>Teacher.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="hourLCDNumber">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>380</y>
+      <width>51</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb rgb(0, 33, 72);;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Plain</enum>
+    </property>
+    <property name="digitCount">
+     <number>2</number>
+    </property>
+    <property name="intValue" stdset="0">
+     <number>10</number>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="minuteLCDNumber">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>380</y>
+      <width>51</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 33, 72);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Plain</enum>
+    </property>
+    <property name="digitCount">
+     <number>2</number>
+    </property>
+    <property name="intValue" stdset="0">
+     <number>24</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="dateLabel">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>380</y>
+      <width>191</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>32</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:  rgb(0, 33, 72);</string>
+    </property>
+    <property name="text">
+     <string>15.3.2024</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="returnCarPushButton">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>0</y>
+      <width>171</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Tallentaa henkilön tiedot tietokantaa&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="toolTipDuration">
+     <number>3000</number>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(140, 51, 85);</string>
+    </property>
+    <property name="text">
+     <string>PALAUTA</string>
+    </property>
+    <property name="icon">
+     <iconset resource="testPictures.qrc">
+      <normaloff>:/png/palauta.drawio.png</normaloff>:/png/palauta.drawio.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>42</width>
+      <height>42</height>
+     </size>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 33, 72);
+color: rgb(255, 255, 255);</string>
+   </property>
+   <widget class="QMenu" name="menuTiedosto">
+    <property name="title">
+     <string>Tiedosto</string>
+    </property>
+    <widget class="QMenu" name="menuEdelliset">
+     <property name="title">
+      <string>Edelliset</string>
+     </property>
+     <addaction name="actionKalle"/>
+     <addaction name="actionVille"/>
+     <addaction name="actionJaana"/>
+     <addaction name="actionMikko"/>
+    </widget>
+    <addaction name="actionLopeta"/>
+    <addaction name="menuEdelliset"/>
+    <addaction name="actionTallenna_nimell"/>
+   </widget>
+   <addaction name="menuTiedosto"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="toolTipDuration">
+    <number>-1</number>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(243, 89, 148);</string>
+   </property>
+  </widget>
+  <action name="actionLopeta">
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
+   <property name="text">
+    <string>Lopeta</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionKalle">
+   <property name="text">
+    <string>Kalle</string>
+   </property>
+  </action>
+  <action name="actionVille">
+   <property name="text">
+    <string>Ville</string>
+   </property>
+  </action>
+  <action name="actionJaana">
+   <property name="text">
+    <string>Jaana</string>
+   </property>
+  </action>
+  <action name="actionMikko">
+   <property name="text">
+    <string>Mikko</string>
+   </property>
+  </action>
+  <action name="actionTallenna_nimell">
+   <property name="text">
+    <string>Tallenna nimellä...</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="testPictures.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>takeCarPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>teacherPictureLabel</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>203</x>
+     <y>100</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>164</x>
+     <y>212</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>returnCarPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>keyPictureLabel</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>401</x>
+     <y>94</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>407</x>
+     <y>254</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ssnLineEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>keyBarcodeLineEdit</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>183</x>
+     <y>382</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>412</x>
+     <y>379</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

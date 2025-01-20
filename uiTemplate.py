@@ -2,8 +2,8 @@
 # KÄÄNNETYSTÄ KÄYTTÖLIITTYMÄTIEDOSTOSTA (mainWindow_ui.py)
 # =====================================================
 
-# KIRJASTON JA MODUULIEN LATAUKSET
-# --------------------------------
+# KIRJASTOJEN JA MODUULIEN LATAUKSET
+# ----------------------------------
 import os # Polkumääritykset
 import sys # Käynnistysargumentit
 
@@ -13,12 +13,12 @@ from mainWindow_ui import Ui_MainWindow # Käännetyn käyttöliittymän luokka
 # Määritellään luokka, joka perii QMainWindow- ja Ui_MainWindow-luokan
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     """A class for creating main window for the application"""
-
+    
     # Määritellään olionmuodostin ja kutsutaan yliluokkien muodostimia
     def __init__(self):
         super().__init__()
 
-        # Luodaan käyttöliittymä konvertoidun tiedoston perusteella MainWindow ui-ominaisuudeksi. Tämä suojaa lopun MainWindow-olion ylikirjoituksella
+        # Luodaan käyttöliittymä konvertoidun tiedoston perusteella MainWindow:n ui-ominaisuudeksi. Tämä suojaa lopun MainWindow-olion ylikirjoitukselta, kun ui-tiedostoa päivitetään
         self.ui = Ui_MainWindow()
 
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
@@ -26,12 +26,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
+        
+        # Kun Tulosta-painiketta on klikattu, kutsutaan updatePrintedLabel-metodia
+        self.ui.tulostaPushButton.clicked.connect(self.updatePrintedLabel)
 
-        # Kun Tulosa painiketta on klikattu, kutsutaan updatePrintedLabel-metodia
-        self.ui.TulostaPushButton_2.clicked.connect(self.updatePrintedLabel)
-    
-    
-    
+        
+   
+   
     # OHJELMOIDUT SLOTIT
     # ------------------
 
@@ -47,13 +48,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         msgBox.setWindowTitle('Hirveetä!')
         msgBox.setText('Jotain kamalaa tapahtui')
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        msgBox.exec()        
+        msgBox.exec()
 
-# Luodaan sovellus ja käynnistetään se
+
+# Luodaan sovellus
 app = QtWidgets.QApplication(sys.argv)
 
 # Luodaan objekti pääikkunalle ja tehdään siitä näkyvä
 window = MainWindow()
 window.show()
 
+# Käynnistetään sovellus ja tapahtumienkäsittelijä
 app.exec()
+
+    
