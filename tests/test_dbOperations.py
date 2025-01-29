@@ -2,10 +2,10 @@
 # ============================
 
 import pytest # Virheilmoitusten testaus vaatii
-import dbOperations # Testattava moduuli
+from lendingModules import dbOperations # Testattava moduuli
 
 settingsDictionary = {'server': 'localhost',
-                      'port': '5432',
+                      'port': '5433',
                       'database': 'testaus',
                       'userName': 'postgres',
                       'password': 'Q2werty'}
