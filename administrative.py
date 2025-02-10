@@ -93,7 +93,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     # Valikkotoimintojen slotit
     # -------------------------
-
+    # TODO: Tehdään slotit @Slot()-muodostimella ja mahdollistetaan äänitiedostojen soittaminen säikeinä
+    
     # Asetusdialogin avaus
     def openSettingsDialog(self):
         self.saveSettingsDialog = SaveSettingsDialog() # Luodaan luokasta olio
@@ -453,5 +454,3 @@ if __name__ == "__main__":
 
     # Käynnistetään sovellus ja tapahtumienkäsittelijä
     app.exec()
-
-    

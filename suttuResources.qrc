@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="pictures">
+    <file>uiPictures/student.png</file>
+  </qresource>
+</RCC>

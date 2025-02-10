@@ -8,7 +8,10 @@ import os # Polkumääritykset
 import sys # Käynnistysargumentit
 import json # JSON-tiedoston käsittely
 
+import time # Tuodaan aika ja päivä muokkaus mahdollisuudet
+
 from PySide6 import QtWidgets # Qt-vimpaimet
+from PySide6.QtCore import QThreadPool, Slot # Säikeistys ja Slot-dekoraattori
 
 from lendingModules import sound # Äänikomennot
 from lendingModules import dbOperations # Tietokantatoiminnot
@@ -24,6 +27,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # Määritellään olionmuodostin ja kutsutaan yliluokkien muodostimia
     def __init__(self):
         super().__init__()
+
+        # Luodaan säievaramto
+        self.threadPool = QThreadPool()
 
         # Luodaan käyttöliittymä konvertoidun tiedoston perusteella MainWindow:n ui-ominaisuudeksi. Tämä suojaa lopun MainWindow-olion ylikirjoitukselta, kun ui-tiedostoa päivitetään
         self.ui = Ui_MainWindow()
@@ -54,7 +60,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.statusbar.showMessage('Valitse Lainaa auto tai Palauta auto')
 
 
-
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
 
@@ -79,6 +84,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Kun palauttaessa on luettu avaimen viivakoodi kutsutaan returnStart metodia
         self.ui.keysReturnLineEdit.returnPressed.connect(self.returnStart)
+
+        # Kun kumoa painiketta painetaan palautetaan UI-alkutilaan
+        self.ui.goBackPushButton.clicked.connect(self.goBack)
 
     # OHJELMOIDUT SLOTIT
     # ------------------
@@ -106,8 +114,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.okPushButton.hide()
         self.ui.keysReturnLineEdit.clear()
         self.ui.keysReturnLineEdit.hide()
+        self.ui.carKeysReturnLabel.hide()
+        self.ui.carTakeReturnLabel.hide()
+        self.ui.veachleLabel.hide()
+        self.ui.carLabel.hide()
 
     # Kuin Aloita lainaus nappia on painettu nämä componentit tulee esiin tai piiloutuu
+    @Slot()
     def takeCar(self):
         self.ui.borrowerLabel.show()
         self.ui.humanLabel.show()
@@ -117,51 +130,81 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.returnCarPushButton.hide()
         self.ui.takeCarPushButton.hide()
         self.ui.statusbar.showMessage('Lue ajokortin viivakoodi')
-        if self.soundOn:
-            sound.playWav('sounds\\drivingLicence.WAV')
+        self.threadPool.start(self.playWavFile)
+    # Soitetaan äänitiedosto
+    @Slot()
+    def playWavFile(self):
+        sound.playWav('sounds\\drivingLicence.wav')
 
     # Ajokortin lukemisen jälkeen nämä komponentint tulevat essin
+    @Slot()
     def showKeys(self):
+        self.ui.licenseLineEdit.hide()
         self.ui.nameLabel.show()
         self.ui.carTakeLabel.show()
         self.ui.carKeysLabel.show()
         self.ui.keysLineEdit.show()
         self.ui.keysLineEdit.setFocus()
         self.ui.statusbar.showMessage('Lue avaimen viivakoodi')
-        if self.soundOn:
-            sound.playWav('sounds\\readKey.WAV')
+        self.threadPool.start(self.playWavKeys)
+
+    # Soitetaan äänitiedosto
+    @Slot()
+    def playWavKeys(self):
+        sound.playWav('sounds\\readKey.WAV')
 
     # Kuin avaimen viivakoodi on luettu nämä komponentit tulevat essin
+    @Slot()
     def showTime(self):
         self.ui.carInfoLabel.show()
         self.ui.calenderLabel.show()
         self.ui.dateLabel.show()
         self.ui.clockPictureLabel.show()
         self.ui.hourLabel.show()
+        self.ui.veachleLabel.show()
+        self.ui.carLabel.show()
         self.ui.okPushButton.show()
         self.ui.statusbar.showMessage('Jos tiedot on oikein paina Ok painiketta')
-        if self.soundOn:
-            sound.playWav('sounds\\saveData.WAV')
+        self.threadPool.start(self.playWavData)
+        self.ui.dateLabel.setText(f'{time.strftime('%d.%m.%Y')}')
+        self.ui.hourLabel.setText(f'{time.strftime('%H:%M')}')
 
+    # Soitetaan äänitiedosto
+    @Slot()
+    def playWavData(self):
+        sound.playWav('sounds\\saveData.wav')
+
+    @Slot()
     def saveLendingData(self):
         # tallenna tiedot tietokantaan
         # Luetaan tietokanta-asetukset paikallisiin muuttujiin
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
         dbSettings['password'] = plainTextPassword # Vaihdetaan selväkieliseksi 
-        # TODO: Laita seuraava lohko virheenkäsittelyn sisälle
-        # Luodaan tietokantayhteys-olio
-        dbConnection = dbOperations.DbConnection(dbSettings)
-        ssn = self.ui.licenseLineEdit.text()
-        key = self.ui.keysLineEdit.text()
-        dataDictionary = {'hetu': ssn,
+        
+        try:
+            # Luodaan tietokantayhteys-olio
+            dbConnection = dbOperations.DbConnection(dbSettings)
+            ssn = self.ui.licenseLineEdit.text()
+            key = self.ui.keysLineEdit.text()
+            dataDictionary = {'hetu': ssn,
                           'rekisterinumero': key}
-        dbConnection.addToTable('lainaus', dataDictionary)
+            dbConnection.addToTable('lainaus', dataDictionary)
 
-        self.setInitialElements()
-        self.ui.statusbar.showMessage('Lainaus tiedot on tallenettu', 5000)
-        if self.soundOn:
-            sound.playWav('sounds\\lendingOk.WAV')
+            self.setInitialElements()
+            self.ui.statusbar.showMessage('Lainaus tiedot on tallenettu', 5000)
+            self.threadPool.start(self.playWavOk)
+
+        except Exception as e:
+            title = 'Lainaustietojen tallentaminen ei onnistu'
+            text = 'Ajokortin tai auton tiedot virheeliset, ota yhteys henkilökuntaan!'
+            detailedText = str(e)
+            self.openWarning(title, text, detailedText)
+    
+    @Slot()
+    def playWavOk(self):
+        sound.playWav('sounds\\lendingOk.wav')
+
 
     # Mykistetään äänet
     def muteSound(self):
@@ -179,30 +222,47 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     # Kuin aloita palautus nappia on painettu nämä komponentit tulevat näkyviin tai piiloutuu
     def returnCar(self):
-        self.ui.carTakeLabel.show()
-        self.ui.carKeysLabel.show()
+        self.ui.carTakeReturnLabel.show()
+        self.ui.carKeysReturnLabel.show()
         self.ui.keysReturnLineEdit.show()
         self.ui.keysReturnLineEdit.setFocus()
         self.ui.goBackPushButton.show()
         self.ui.takeCarPushButton.hide()
         self.ui.returnCarPushButton.hide()
         self.ui.statusbar.showMessage('Lue avaimen viivakoodi')
-        if self.soundOn:
-            sound.playWav('sounds\\redKey.WAV')
+        self.threadPool.start(self.playWavReturn)
+
+    # Soitetaan äänitiedosto
+    @Slot()
+    def playWavReturn(arg):
+        sound.playWav('sounds\\redKey.wav')
+            
 
 
     # Kumoa painikkeen painamisen jälkeen palataan alkunäkymään
     def returnStart(self):
         self.setInitialElements()
         self.ui.statusbar.showMessage('Palattu alkunäkymään',5000)
+
+    def goBack(self):
+        self.setInitialElements()
+        self.ui.statusbar.showMessage('Toiminto peruutettiin', 5000)
     
 
-    # Avataan MessageBox
-    def openWarning(self):
+    # Malli mahdollista virheilmoitusta varten
+    def openWarning(self, title: str, text: str, detailedText:str) -> None:
+        """Opens a message box for errors
+
+        Args:
+            title (str): The title of the message box
+            text (str): Error message
+            detailedText (str): Detailed error message
+        """
         msgBox = QtWidgets.QMessageBox()
         msgBox.setIcon(QtWidgets.QMessageBox.Critical)
-        msgBox.setWindowTitle('Tietokantayhteyttä ei voitu muodostaa')
-        msgBox.setText('Ota yhteyttä ryhmän ohjaajaan')
+        msgBox.setWindowTitle(title)
+        msgBox.setText(text)
+        msgBox.setDetailedText(detailedText)
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec()
 
