@@ -28,7 +28,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
 
-        # Luodaan säievaramto
+        # Luodaan säikeistystä varten uusi säievaranto
+        self.threadPool = QThreadPool()
+
+        # Luodaan säievaranto
         self.threadPool = QThreadPool()
 
         # Luodaan käyttöliittymä konvertoidun tiedoston perusteella MainWindow:n ui-ominaisuudeksi. Tämä suojaa lopun MainWindow-olion ylikirjoitukselta, kun ui-tiedostoa päivitetään
@@ -91,7 +94,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # OHJELMOIDUT SLOTIT
     # ------------------
 
-    # Kutsutana kuin halutaan palauttaa käyttöliitymän alkutilaan
+    # Soita parametrina annettu äänitiedosto
+    @Slot(str)
+    def playSoundFile(self, soundFileName):
+        fileAndPath = 'sounds\\' + soundFileName
+        sound.playWav(fileAndPath)
+
+    @Slot(str)
+    def playSoundInThread(self, soundFileName):
+        self.threadPool.start(self.playSoundFile(soundFileName))
+
+    # Palauta käyttöliittymä alkutilaan
     def setInitialElements(self):
         self.ui.returnCarPushButton.show()
         self.ui.takeCarPushButton.show()
